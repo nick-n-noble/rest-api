@@ -43,14 +43,6 @@ app.get('/', (req, res) => {
   });
 });
 
-//Ping Route
-app.get('/ping', (req, res) => {
-  res.send({
-    error: false,
-    message: 'Server is healthy',
-  });
-});
-
 app.listen(PORT, () => {
   console.log('Server started listening on PORT : ' + PORT);
 })
