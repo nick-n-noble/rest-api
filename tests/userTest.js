@@ -1,6 +1,6 @@
 //TO RUN TEST MAKE SURE testAccount IS DELETED FROM DATABASE
 const mongoose = require('mongoose');
-const User = require('../src/models/User');
+const User = require('../src/models/user.model');
 require('dotenv').config();
 
 mongoose.connect(process.env.MONGO_URI, {
