@@ -32,6 +32,9 @@ exports.register = async (req, res) => {
     //Save user token
     user.token = token;
 
+    //Save token to the DB
+    await user.save();
+
     //Return new user
     return res.status(201).json(user);
   } catch (err) {
@@ -61,14 +64,35 @@ exports.login = async (req, res) => {
 
           //Save user token
           user.token = token;
-
+          user.save();
           //Return user
           return res.status(200).json(user);
         } else {
           return res.status(400).send("Invalid Credentials");
         }
       });
+
+      //Save token to the DB
     }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+exports.getUsername = async (req, res) => {
+  try {
+    //Get JSON Web Token
+    const token = req.headers["x-access-token"];
+
+    //Get account from token
+    const user = await User.findOne({ token });
+
+    const username = user.username;
+
+    //Respond with username
+    return res.status(200).json({
+      username: username,
+    });
   } catch (err) {
     console.error(err);
   }
