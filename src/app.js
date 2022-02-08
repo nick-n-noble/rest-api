@@ -39,6 +39,10 @@ app.post("/login", (req, res) => {
   user.login(req, res);
 })
 
+app.get("/user/:username", auth, (req, res) => {
+  user.getUserByUsername(req, res);
+})
+
 app.get("/get/username", auth, (req, res) => {
   user.getUsername(req, res);
 })

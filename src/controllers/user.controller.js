@@ -79,6 +79,28 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.getUserByUsername = async (req, res) => {
+  try {
+    const username = req.params.username;
+    console.log(username);
+    const user = await User.findOne({ username });
+
+    if (!user) {
+      return res.status(404).send("User does not exist");
+    }
+
+    const response = {
+      id: user._id,
+      email: user.email,
+      username: user.username,
+    };
+
+    return res.status(200).json(response);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 exports.getUsername = async (req, res) => {
   try {
     //Get JSON Web Token
